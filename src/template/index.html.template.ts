@@ -6,6 +6,10 @@ export const indexTemplate = () => {
     <title>Angular project view</title>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.2.11/cytoscape.min.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -21,6 +25,16 @@ export const indexTemplate = () => {
                 <li class="menu-element"><a class="menu-link" href="providers.html">providers</a></li>
             </ul>
         </div>
+    </div>
+</div>
+
+<div id="filters" class="toolbox">
+    <div class="toolbox-header">
+        <div class="title"><h4>Filters</h4></div>
+        <div class="actions"><button onclick="toggle()">x</button></div>
+    </div>
+    <div class="toolbox-body">
+
     </div>
 </div>
 <div id="cy"></div>

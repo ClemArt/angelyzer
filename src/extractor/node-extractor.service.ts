@@ -60,7 +60,7 @@ export class NodeExtractorService {
     public declarationsToNodes(module: AngularModule): Node[] {
         if (module.declarations) {
             return module.declarations.map(declaration => (new Node({
-                data: {id: declaration, name: declaration, faveColor: '#2a586f', faveShape: 'triangle'}
+                data: {id: declaration, name: declaration, parent: module.name}
             })));
         }
         return [];
@@ -68,11 +68,17 @@ export class NodeExtractorService {
 
     public providersToNodes(module: AngularModule): Node[] {
         if (module.providers) {
-            return module.providers.map(declaration => (new Node({
-                data: {id: declaration, name: declaration, faveColor: '#EDA1ED', faveShape: 'ellipse'}
+            return module.providers.map(provider => (new Node({
+                data: {id: provider, name: provider, parent: module.name}
             })));
         }
         return [];
     }
 
+    public extractModule(module: AngularModule): Node[] {
+      let moduleNode = new Node({data: {id: module.name, name: module.name}});
+      let declarations = this.declarationsToNodes(module);
+      let providers = this.providersToNodes(module);
+      return [moduleNode, ...declarations, ...providers];
+    }
 }

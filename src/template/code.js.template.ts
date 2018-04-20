@@ -8,44 +8,43 @@ export const graphJSTemplate = data => (`cytoscape({
         padding: 10
     },
 
-    style: cytoscape.stylesheet()
-        .selector('node')
-        .css({
-            'shape': 'data(faveShape)',
-            'width': 'mapData(weight, 40, 80, 20, 60)',
-            'content': 'data(name)',
-            'text-valign': 'center',
-            'text-outline-width': 2,
-            'text-outline-color': 'data(faveColor)',
-            'background-color': 'data(faveColor)',
-            'color': '#fff'
-        })
-        .selector(':selected')
-        .css({
-            'border-width': 3,
-            'border-color': '#333'
-        })
-        .selector('edge')
-        .css({
-            'curve-style': 'bezier',
-            'opacity': 0.666,
-            'width': 'mapData(strength, 70, 100, 2, 6)',
-            'target-arrow-shape': 'triangle',
-            'source-arrow-shape': 'circle',
-            'line-color': 'data(faveColor)',
-            'source-arrow-color': 'data(faveColor)',
-            'target-arrow-color': 'data(faveColor)'
-        })
-        .selector('edge.questionable')
-        .css({
-            'line-style': 'dotted',
-            'target-arrow-shape': 'diamond'
-        })
-        .selector('.faded')
-        .css({
-            'opacity': 0.25,
-            'text-opacity': 0
-        }),
+    style: [
+    {
+      selector: 'node',
+      css: {
+        'content': 'data(id)',
+        'text-valign': 'center',
+        'text-halign': 'center'
+      }
+    },
+    {
+      selector: '$node > node',
+      css: {
+        'padding-top': '10px',
+        'padding-left': '10px',
+        'padding-bottom': '10px',
+        'padding-right': '10px',
+        'text-valign': 'top',
+        'text-halign': 'center',
+        'background-color': '#bbb'
+      }
+    },
+    {
+      selector: 'edge',
+      css: {
+        'target-arrow-shape': 'triangle'
+      }
+    },
+    {
+      selector: ':selected',
+      css: {
+        'background-color': 'black',
+        'line-color': 'black',
+        'target-arrow-color': 'black',
+        'source-arrow-color': 'black'
+      }
+    }
+  ],
 
     elements: ${JSON.stringify(data)},
 
@@ -53,4 +52,26 @@ export const graphJSTemplate = data => (`cytoscape({
         window.cy = this;
     }
 });
+
+var isToolboxOpened = true;
+function toggle() {
+    isToolboxOpened = !isToolboxOpened;
+    if (!isToolboxOpened) {
+        $(".actions>button").html("+");
+    } else {
+        $(".actions>button").html("x");
+    }
+    var maxHeight = 640;
+    var minHeight = 40;
+    var filtersHeight = $('#filters').height();
+    setInterval(function(){
+        if (filtersHeight > minHeight && !isToolboxOpened) {
+            filtersHeight = filtersHeight-10;
+            $('#filters').height(filtersHeight);
+        } else if (filtersHeight < maxHeight && isToolboxOpened) {
+            filtersHeight = filtersHeight+10;
+            $('#filters').height(filtersHeight);
+        }
+    }, 1);
+}
 `);

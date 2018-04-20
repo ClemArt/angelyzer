@@ -17,6 +17,47 @@ export const cssTemplate = () => {
     flex-direction: column;
     width: 100%;
 }
+.toolbox {
+    position: absolute;
+    z-index: 10;
+    width: 20rem;
+    height: 40rem;
+    background: #1976d2;
+    right: 5px;
+    top: 70px;
+    box-shadow: 4px 4px 10px 0px;
+}
+.toolbox-header {
+    width:100%;
+    height:100%;
+    float:left;
+    text-align:justify;
+    margin-bottom:15px;
+}
+.title {
+    float:left;
+    width:80%;
+    display:inline-block;
+}
+h4 {
+    margin: 0;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-weight: 400;
+    color: #fff;
+    font-size: 16px;
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    text-transform: uppercase;
+}
+.actions {
+    width: 18%;
+    float: left;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.actions>button {
+    float: right;
+}
 
 .toolbar-row {
     padding: 0 16px 0 0;
